@@ -2,6 +2,7 @@
 
 ## Connect
 To connect the ros server through the websocket protocol.
+- `xxx.xxx.xxx.xxx` is your ROS server IP
 
 ```js
 var ROS_IP = 'xxx.xxx.xxx.xxx:9090';
