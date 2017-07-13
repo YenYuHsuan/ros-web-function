@@ -29,17 +29,15 @@ Publish message to the specific topic.
 
 ```js
 function ros_pub(topic, msg_type, payload){
-	//define the topic
-	var pub_topic = new ROSLIB.Topic({
-		ros : ros,
-		name : topic,
-		messageType : msg_type
-	});
-	//publish to the topic
-	var pub_msg = new ROSLIB.Message({
-		payload
-	});
-	pub_topic.publish(pub_msg);
+  //define the topic
+  var pub_topic = new ROSLIB.Topic({
+	ros : ros,
+	name : topic,
+	messageType : msg_type
+  });
+  //publish to the topic
+  var pub_msg = new ROSLIB.Message(payload);
+  pub_topic.publish(pub_msg);
 }
 ```
 
@@ -48,15 +46,16 @@ Subscribe message from the specific topic.
 
 ```js
 function ros_sub(topic, msg_type){
-	//define the topic
-	var sub_topic = new ROSLIB.Topic({
-		ros : ros,
-		name : topic,
-		messageType : msg_type
-	});
-	//subscribe from the topic
-	sub_topic.subscribe(function(message) {
-		console.log("Subscribe to topic " + topic + ", recieved message:" + message);
-	});
+  //define the topic
+  var sub_topic = new ROSLIB.Topic({
+	ros : ros,
+	name : topic,
+	messageType : msg_type
+  });
+  //subscribe from the topic
+  sub_topic.subscribe(function(message) {
+	console.log("Subscribe to topic " + topic + ", recieved message:" + JSON.stringify(message));
+	$('#ros_subscriber').append("<p>"+JSON.stringify(message)+"</p>");
+  });
 }
 ```

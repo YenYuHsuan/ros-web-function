@@ -1,6 +1,4 @@
-
-
-var ROS_IP = 'xxx.xxx.xxx.xxx:9090';
+var ROS_IP = 'xxx.xxx.xxx.xxx:8080';
 
 // Connect to ROS.
 var ros = new ROSLIB.Ros({
@@ -27,9 +25,7 @@ function ros_pub(topic, msg_type, payload){
 		messageType : msg_type
 	});
 	//publish to the topic
-	var pub_msg = new ROSLIB.Message({
-		payload
-	});
+	var pub_msg = new ROSLIB.Message(payload);
 	pub_topic.publish(pub_msg);
 }
 
@@ -43,6 +39,7 @@ function ros_sub(topic, msg_type){
 	});
 	//subscribe from the topic
 	sub_topic.subscribe(function(message) {
-		console.log("Subscribe to topic " + topic + ", recieved message:" + message);
+		console.log("Subscribe to topic " + topic + ", recieved message:" + JSON.stringify(message));
+		$('#ros_subscriber').append("<p>"+JSON.stringify(message)+"</p>");
 	});
 }
